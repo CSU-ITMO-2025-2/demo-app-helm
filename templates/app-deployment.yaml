@@ -57,11 +57,6 @@ spec:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: db-credentials
-            - name: APP_MESSAGE
-              valueFrom:
-                secretKeyRef:
-                  key: APP_MESSAGE
-                  name: demo-app-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
