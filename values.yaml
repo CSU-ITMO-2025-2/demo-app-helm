@@ -14,23 +14,18 @@ worker:
 
 imagePullSecrets:
   - name: ghcr-secret
-
 nameOverride: ""
 fullnameOverride: ""
-
 serviceAccount:
   create: true
   annotations: {}
   name: ""
-
 podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
-
 service:
   type: ClusterIP
   port: 80
-
 ingress:
   enabled: true
   className: "nginx"
@@ -43,10 +38,9 @@ ingress:
         - path: /
           pathType: Prefix
   tls:
-   - hosts:
-     - demo.kubepractice.ru
-     secretName: demo-prod-secret
-
+    - hosts:
+        - demo.kubepractice.ru
+      secretName: demo-prod-secret
 resources:
   limits:
     cpu: 250m
@@ -54,7 +48,6 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-
 autoscaling:
   enabled: false
   minReplicas: 1
