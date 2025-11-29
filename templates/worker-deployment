@@ -39,11 +39,16 @@ spec:
                 secretKeyRef:
                   key: DATABASE_URL
                   name: db-credentials
-            - name: OPENAI_API_KEY
+            - name: YANDEX_CLOUD_API_KEY
               valueFrom:
                 secretKeyRef:
-                  key: OPENAI_API_KEY
-                  name: openai-credentials
+                  key: YANDEX_CLOUD_API_KEY
+                  name: demo-openai-config
+            - name: YANDEX_CLOUD_FOLDER
+              valueFrom:
+                secretKeyRef:
+                  key: YANDEX_CLOUD_FOLDER
+                  name: demo-openai-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
