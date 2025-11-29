@@ -31,6 +31,21 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Worker name helpers build on the base app helpers to keep naming consistent.
+*/}}
+{{- define "demo-worker.name" -}}
+{{- printf "%s-worker" (include "demo-app.name" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "demo-worker.fullname" -}}
+{{- printf "%s-worker" (include "demo-app.fullname" .) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "demo-worker.chart" -}}
+{{- include "demo-app.chart" . -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "demo-app.labels" -}}
@@ -51,6 +66,26 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
+Worker-specific labels
+*/}}
+{{- define "demo-worker.labels" -}}
+helm.sh/chart: {{ include "demo-worker.chart" . }}
+{{ include "demo-worker.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end -}}
+
+{{/*
+Worker selector labels
+*/}}
+{{- define "demo-worker.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "demo-worker.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
 Create the name of the service account to use
 */}}
 {{- define "demo-app.serviceAccountName" -}}
@@ -59,4 +94,11 @@ Create the name of the service account to use
 {{- else -}}
 {{- default "default" .Values.serviceAccount.name -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Service account name for worker resources
+*/}}
+{{- define "demo-worker.serviceAccountName" -}}
+{{- include "demo-app.serviceAccountName" . -}}
 {{- end -}}
