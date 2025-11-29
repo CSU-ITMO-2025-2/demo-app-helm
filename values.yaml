@@ -8,7 +8,7 @@ worker:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
     pullPolicy: Always
-    tag: "sha-e329b96"
+    tag: "sha-dd660a7"
 imagePullSecrets:
   - name: ghcr-secret
 nameOverride: ""
