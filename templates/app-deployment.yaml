@@ -31,7 +31,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -55,11 +55,13 @@ spec:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.databaseSecretName }} 
-                  key: DATABASE_URL 
-            {{- with .Values.env }}
-            {{- toYaml . | nindent 12 }}
-            {{- end }}
+                  key: DATABASE_URL
+                  name: db-credentials
+            - name: APP_MESSAGE
+              valueFrom:
+                secretKeyRef:
+                  key: APP_MESSAGE
+                  name: demo-app-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
