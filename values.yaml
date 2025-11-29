@@ -3,7 +3,7 @@ app:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
-    tag: "latest"
+    tag: "sha-3903451"
 worker:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
