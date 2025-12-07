@@ -3,12 +3,12 @@ app:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
-    tag: "sha-3903451"
+    tag: "sha-cd4b520"
 worker:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
     pullPolicy: Always
-    tag: "sha-e5f8f54"
+    tag: "sha-dd660a7"
   replicaCount: 2
   autoscaling:
     enabled: false
