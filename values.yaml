@@ -3,7 +3,7 @@ app:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
-    tag: "sha-cd4b520"
+    tag: "sha-c97042a"
   autoscaling:
     enabled: true
     minReplicas: 1
@@ -14,7 +14,7 @@ worker:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
     pullPolicy: Always
-    tag: "sha-dd660a7"
+    tag: "sha-bf498d0"
   replicaCount: 2
   autoscaling:
     enabled: false
