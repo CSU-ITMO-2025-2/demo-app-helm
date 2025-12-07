@@ -21,4 +21,5 @@ spec:
         topic: {{ .Values.worker.keda.topic | quote }}
         consumerGroup: {{ .Values.worker.keda.consumerGroup | quote }}
         lagThreshold: "{{ .Values.worker.keda.lagThreshold }}"
+        activationLagThreshold: "1"
 {{- end }}
