@@ -33,7 +33,7 @@ worker:
     cooldownPeriod: 300
     bootstrapServers: my-cluster-kafka-bootstrap.kafka.svc.cluster.local:9092
     topic: todos-created
-    consumerGroup: demo-worker
+    consumerGroup: todo-generator
     lagThreshold: 5
 imagePullSecrets:
   - name: ghcr-secret
