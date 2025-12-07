@@ -9,6 +9,16 @@ worker:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
     pullPolicy: Always
     tag: "sha-e5f8f54"
+  replicaCount: 2
+  autoscaling:
+    enabled: false
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+  pdb:
+    enabled: true
+    minAvailable: 2
 imagePullSecrets:
   - name: ghcr-secret
 nameOverride: ""
@@ -54,3 +64,6 @@ autoscaling:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+podAntiAffinity:
+  enabled: true
+  topologyKey: kubernetes.io/hostname
