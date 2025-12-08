@@ -3,7 +3,7 @@ app:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
-    tag: "sha-c97042a"
+    tag: "sha-05982bf"
   autoscaling:
     enabled: true
     minReplicas: 1
