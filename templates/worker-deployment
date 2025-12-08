@@ -59,8 +59,10 @@ spec:
       affinity:
         {{- if .Values.podAntiAffinity.enabled }}
         podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: {{ include "demo-worker.name" . }}
               topologyKey: {{ .Values.podAntiAffinity.topologyKey | default "kubernetes.io/hostname" }}
