@@ -70,7 +70,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
-                  app.kubernetes.io/name: {{ include "demo-worker.name" . }}
+                  app.kubernetes.io/name: {{ include "demo-app.name" . }}
               topologyKey: {{ .Values.podAntiAffinity.topologyKey | default "kubernetes.io/hostname" }}
         {{- end }}
         {{- with .Values.affinity }}
