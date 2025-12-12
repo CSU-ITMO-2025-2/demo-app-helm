@@ -4,6 +4,36 @@ app:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
     tag: "sha-c97042a"
+  rollout:
+    enabled: true
+    strategy: canary
+    revisionHistoryLimit: 5
+    progressDeadlineSeconds: 600
+    canary:
+      maxSurge: 1
+      maxUnavailable: 0
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 30
+        - setWeight: 50
+        - pause:
+            duration: 60
+        - setWeight: 100
+      analysis:
+        enabled: true
+        startingStep: 2
+        templateName: ""
+        args: []
+    analysisTemplate:
+      enabled: true
+      nameOverride: ""
+      prometheusAddress: http://monitoring-kube-prometheus-prometheus.monitoring:9090
+      errorRate:
+        interval: 30s
+        lookbackWindow: 5m
+        successCondition: result < 0.05
+        failureCondition: result >= 0.05
   autoscaling:
     enabled: true
     minReplicas: 1
@@ -49,6 +79,14 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  scrapeTimeout: 10s
+  path: /metrics
+  scheme: http
+  portName: http
+  labels: {}
 ingress:
   enabled: true
   className: "nginx"
