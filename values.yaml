@@ -3,7 +3,7 @@ app:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-app
     pullPolicy: Always
-    tag: "sha-49ec03b"
+    tag: "sha-f9cbe31"
   rollout:
     enabled: true
     strategy: canary
