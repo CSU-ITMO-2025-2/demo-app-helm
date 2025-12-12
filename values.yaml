@@ -34,6 +34,19 @@ app:
         lookbackWindow: 5m
         successCondition: result[0] < 0.05
         failureCondition: result[0] >= 0.05
+  destinationRule:
+    enabled: true
+    host: ""
+    trafficPolicy:
+      connectionPool:
+        http:
+          http1MaxPendingRequests: 1
+          maxRequestsPerConnection: 1
+      outlierDetection:
+        consecutive5xxErrors: 2
+        interval: 5s
+        baseEjectionTime: 30s
+        maxEjectionPercent: 50
   autoscaling:
     enabled: true
     minReplicas: 1
