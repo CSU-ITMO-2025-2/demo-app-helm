@@ -79,14 +79,6 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
-serviceMonitor:
-  enabled: true
-  interval: 30s
-  scrapeTimeout: 10s
-  path: /metrics
-  scheme: http
-  portName: http
-  labels: {}
 ingress:
   enabled: true
   className: "nginx"
