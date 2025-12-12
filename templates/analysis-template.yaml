@@ -17,6 +17,29 @@ spec:
         prometheus:
           address: {{ $analysisTemplate.prometheusAddress }}
           query: |
-            sum(rate(http_requests_total{app="{{ include "demo-app.name" . }}",status=~"5..",namespace="{{ .Release.Namespace }}"}[{{ $analysisTemplate.errorRate.lookbackWindow }}])) /
-            sum(rate(http_requests_total{app="{{ include "demo-app.name" . }}",namespace="{{ .Release.Namespace }}"}[{{ $analysisTemplate.errorRate.lookbackWindow }}]))
+            (
+              sum(
+                rate(
+                  http_requests_total{
+                    service="{{ include "demo-app.fullname" . }}",
+                    namespace="{{ .Release.Namespace }}",
+                    status=~"5..",
+                    path!~"/metrics|/health"
+                  }[{{ $analysisTemplate.errorRate.lookbackWindow }}]
+                )
+              )
+            )
+            /
+            clamp_min(
+              sum(
+                rate(
+                  http_requests_total{
+                    service="{{ include "demo-app.fullname" . }}",
+                    namespace="{{ .Release.Namespace }}",
+                    path!~"/metrics|/health"
+                  }[{{ $analysisTemplate.errorRate.lookbackWindow }}]
+                )
+              ),
+              1
+            )
 {{- end }}
