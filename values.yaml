@@ -44,7 +44,7 @@ worker:
   image:
     repository: ghcr.io/csu-itmo-2025-2/demo-worker
     pullPolicy: Always
-    tag: "sha-bf498d0"
+    tag: "sha-5db561a"
   replicaCount: 2
   autoscaling:
     enabled: false
