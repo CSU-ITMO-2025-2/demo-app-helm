@@ -28,6 +28,7 @@ spec:
                   }[{{ $analysisTemplate.errorRate.lookbackWindow }}]
                 )
               )
+              or vector(0)
             )
             /
             clamp_min(
