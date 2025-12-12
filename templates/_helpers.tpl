@@ -50,6 +50,7 @@ Common labels
 */}}
 {{- define "demo-app.labels" -}}
 helm.sh/chart: {{ include "demo-app.chart" . }}
+sidecar.istio.io/inject: "true"
 {{ include "demo-app.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
