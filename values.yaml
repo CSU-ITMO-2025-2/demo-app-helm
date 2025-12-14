@@ -110,7 +110,7 @@ ingress:
 istioIngress:
   enabled: true
   hosts:
-    - demo.kupepractice-istio.ru
+    - demo.kubepractice-istio.ru
   gateway:
     name: demo-app-gateway
   tls:
