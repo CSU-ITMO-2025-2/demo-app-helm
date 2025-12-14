@@ -117,7 +117,7 @@ istioIngress:
     enabled: true
     secretName: demo-istio-tls
     issuerRef:
-      name: letsencrypt-prod
+      name: letsencrypt-istio
       kind: ClusterIssuer
   redirectHttpToHttps: true
 resources:
