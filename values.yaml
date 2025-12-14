@@ -107,6 +107,19 @@ ingress:
     - hosts:
         - demo.kubepractice.ru
       secretName: demo-prod-secret
+istioIngress:
+  enabled: true
+  hosts:
+    - demo.kupepractice-istio.ru
+  gateway:
+    name: demo-app-gateway
+  tls:
+    enabled: true
+    secretName: demo-istio-tls
+    issuerRef:
+      name: letsencrypt-prod
+      kind: ClusterIssuer
+  redirectHttpToHttps: true
 resources:
   limits:
     cpu: 250m
